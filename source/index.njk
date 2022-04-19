@@ -1,0 +1,21 @@
+---
+pagination:
+  data: collections.toda_tags
+  size: 1
+  alias: tag
+permalink: "/tags/{{ tag | slug }}/index.html"
+# layout: layouts/pagina.njk
+---
+
+<h2>Artigos com o tag "{{ tag }}"</h2>
+
+{% set artigos = collections.artigos | filterByATag(tag) %}
+
+{% for artigo in artigos | reverse %}
+  <ul>
+    <li>
+    <a href="{{artigo.url}}">{{ artigo.data.title }}</a> - {{ artigo.date | readableDate }}:
+     {{ artigo.data.trecho }}
+    </li>
+  </ul>
+{% endfor %}
